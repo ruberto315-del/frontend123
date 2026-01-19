@@ -1,6 +1,7 @@
 import { Outlet, useLocation } from "react-router";
 import Header from "../common/header";
 import { Footer } from "../common/footer";
+import { Toaster } from "sonner";
 
 export const RootLayout = () => {
   const location = useLocation()
@@ -9,6 +10,9 @@ export const RootLayout = () => {
       {location.pathname !== "/auth" && <Header />}
       <Outlet />
       {location.pathname === "/" && <Footer />}
+
+      <Toaster />
     </div>
   );
 };
+
