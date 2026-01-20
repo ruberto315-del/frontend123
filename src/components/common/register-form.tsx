@@ -64,6 +64,7 @@ const RegisterForm: FC<Props> = ({ setAuthType }) => {
     const errors = validate();
     if (errors) {
       setShowErrors(true);
+      setIsPanding(false);
       return;
     }
 
@@ -80,7 +81,7 @@ const RegisterForm: FC<Props> = ({ setAuthType }) => {
         },
         onError: (ctx) => {
           setIsPanding(false);
-          toast.error(ctx.error.message)
+          toast.error(ctx.error.message);
         },
       },
     );
@@ -88,6 +89,7 @@ const RegisterForm: FC<Props> = ({ setAuthType }) => {
 
   const changeUserFormData = (key: keyof FormData, value: string) => {
     setUserFormData((prev) => ({ ...prev, [key]: value }));
+    setShowErrors(false);
   };
 
   return (
@@ -106,8 +108,8 @@ const RegisterForm: FC<Props> = ({ setAuthType }) => {
         label="Email"
         type="email"
         placeholder="Введіть ваш Email"
-        value=""
-        onChange={() => {}}
+        value={formData.email}
+        onChange={(value) => changeUserFormData("email", value)}
         required
         className="mb-4"
       />
@@ -116,8 +118,8 @@ const RegisterForm: FC<Props> = ({ setAuthType }) => {
         label="Телефон"
         type="tel"
         placeholder="Введіть ваш телефон"
-        value=""
-        onChange={() => {}}
+        value={formData.phone}
+        onChange={(value) => changeUserFormData("phone", value)}
         required
         className="mb-4"
       />
@@ -126,8 +128,8 @@ const RegisterForm: FC<Props> = ({ setAuthType }) => {
         label="Пароль"
         type="password"
         placeholder="Введіть ваш пароль"
-        value=""
-        onChange={() => {}}
+        value={formData.password}
+        onChange={(value) => changeUserFormData("password", value)}
         required
         className="mb-4"
       />
@@ -135,8 +137,8 @@ const RegisterForm: FC<Props> = ({ setAuthType }) => {
       {showErrors && (
         <div className="p-3 rounded-xl bg-destructive/10 border border-destructive/20">
           {getFormErrors(errors).map((error) => (
-          <p className="text-sm text-destructive">{error}</p>
-        ))}
+            <p className="text-sm text-destructive">{error}</p>
+          ))}
         </div>
       )}
 
@@ -145,10 +147,11 @@ const RegisterForm: FC<Props> = ({ setAuthType }) => {
         className="w-full mt-4"
         size="lg"
         onClick={handleRegister}
-        disabled={isPanding}
-        {IsPanding? "Завантаження" : "Зареєструватись"}>
+        disabled={isPending}
+      >
+        {isPending ? "Завантаження" : "Зареєструватись"}
       </Button>
-      
+
       <div className="mt-6 text-center">
         <p className="text-sm text-text-secondary flex gap-1 justify-center">
           Вже маєте акаунт?{" "}
