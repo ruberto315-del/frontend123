@@ -3,8 +3,12 @@ import bgImages from "../assets/medical-laboratory.jpg";
 import { Link } from "react-router";
 import SectionHeader from "@/components/common/section-header";
 import CourseCard from "@/components/common/course-card";
+import { UseCourses } from "@/api/hooks/use-courses";
+import type { CourseType } from "@/types/course.type";
 
 const HomePage = () => {
+  const { data: plannedCourses } = UseCourses("PLANNED")
+  const { data: archiveCourses } = UseCourses("ARCHIVED")
   return (
     <main className="">
       <section className="relative overflow-hidden min-h-[90vh] flex items-center">
@@ -158,10 +162,14 @@ const HomePage = () => {
       />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24 mx-auto max-w-7xl">
-          <CourseCard />
-          <CourseCard />
-          <CourseCard />
+          {plannedCourses?.map((course) =>(
+          <CourseCard {...course} />
+          ))}
+
+
+          
         </div>
+        
 
       <SectionHeader 
       title="Проведені заходи" 
@@ -170,6 +178,12 @@ const HomePage = () => {
       icon={<BadgeCheck className="text-success" />}
       bageText="Архів курсів"
       />
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24 mx-auto max-w-7xl">
+        {archiveCourses?.map((course) =>(
+        <CourseCard {...course} />
+        ))}
+
     </main>
   );
 };
