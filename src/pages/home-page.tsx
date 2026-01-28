@@ -7,8 +7,9 @@ import { UseCourses } from "@/api/hooks/use-courses";
 import type { CourseType } from "@/types/course.type";
 
 const HomePage = () => {
-  const { data: plannedCourses } = UseCourses("PLANNED")
-  const { data: archiveCourses } = UseCourses("ARCHIVED")
+  const { data: plannedCourses } = UseCourses("PLANNED");
+  const { data: archiveCourses } = UseCourses("ARCHIVED");
+
   return (
     <main className="">
       <section className="relative overflow-hidden min-h-[90vh] flex items-center">
@@ -153,37 +154,33 @@ const HomePage = () => {
           </div>
         </div>
       </section>
-      <SectionHeader 
-      title="Заплановані заходи" 
-      description="Оберіть програму та розпочніть своє професійне зростання" 
-      color="success"
-      icon={<BadgeCheck className="text-success" />}
-      bageText="Доступно зараз"
-      />
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24 mx-auto max-w-7xl">
-          {plannedCourses?.map((course) =>(
-          <CourseCard {...course} />
-          ))}
-
-
-          
-        </div>
-        
-
-      <SectionHeader 
-      title="Проведені заходи" 
-      description="Ознайомтеся з нашими попередніми програмами" 
-      color="secondary"
-      icon={<BadgeCheck className="text-success" />}
-      bageText="Архів курсів"
+      <SectionHeader
+        title="Заплановані заходи"
+        description="Оберіть програму та розпочніть своє професійне зростання"
+        color="success"
+        icon={<BadgeCheck className="text-success" />}
+        bageText="Доступно зараз"
       />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24 mx-auto max-w-7xl">
-        {archiveCourses?.map((course) =>(
-        <CourseCard {...course} />
+        {plannedCourses?.map((course) => (
+          <CourseCard {...course} />
         ))}
+      </div>
 
+      <SectionHeader
+        title="Проведені заходи"
+        description="Ознайомтеся з нашими попередніми програмами"
+        color="secondary"
+        icon={<BadgeCheck className="text-success" />}
+        bageText="Архів курсів"
+      />
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24 mx-auto max-w-7xl">
+        {archiveCourses?.map((course) => (
+          <CourseCard {...course} />
+        ))}
+      </div>
     </main>
   );
 };

@@ -10,6 +10,7 @@ import AdminRegistrationsPage from "./pages/admin-registrations-page";
 import AdminCertificatesPage from "./pages/admin-certificates-page";
 import AdminUsersPage from "./pages/admin-users-page";
 import ProfilePage from "./pages/profile-page";
+import AdminFullCoursePage from "./pages/admin-full-course-page";
 
 export const router = createBrowserRouter([
   {
@@ -39,6 +40,12 @@ export const router = createBrowserRouter([
           path: "/admin/courses",
           element: <AdminCoursesPage />
         },
+
+          {
+          path: "/admin/courses/:id",
+          element: <AdminFullCoursePage />
+        },
+        
         
           {
           path: "/auth",

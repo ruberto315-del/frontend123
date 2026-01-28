@@ -1,17 +1,17 @@
-export type CourseStatusType = "DRAFR" | "PLANNED" | "ARCHIVED"
+export type CourseStatusType = "DRAFT" | "PLANNED" | "ARCHIVED"
 
 
 export type CourseType = {
     id: number
     name: string
     price: number
-    startDate: Date
-    endDate: Date
+    startDate: string
+    endDate: string
     description: any
     status: CourseStatusType
     registrationOpen: boolean
     certificateTemplate: any
-    certificateTemplateId: number
+    certificateTemplateId?: number
     registrations: any
     createAt: Date
     updateAt: Date
