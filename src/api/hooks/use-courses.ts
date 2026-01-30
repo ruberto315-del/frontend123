@@ -61,7 +61,8 @@ export const useCreateCourses = () => {
         | "registrations"
       >,
     ) => {
-      const { data } = await axiosClient.post("/course", payload);
+      const course = {...payload, startDate: new Date(payload.startDate), price: +payload.price}
+      const { data } = await axiosClient.post("/course", course);
       return data;
     },
     onSuccess: () => {
@@ -91,8 +92,10 @@ export const useUpdateCourses = () => {
         | "registrations"
       >,
     ) => {
-      const { id, ...rest } = payload;
-      const { data } = await axiosClient.patch(`/course${id}`, rest);
+      // @ts-ignore
+      const { id, createAt, updateAt, ...rest } = payload;
+      const course = {...rest, startDate: new Date(payload.startDate), price: +payload.price}
+      const { data } = await axiosClient.patch(`/course${id}`, course);
       return data;
     },
     onSuccess: () => {
