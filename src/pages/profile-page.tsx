@@ -16,7 +16,7 @@ import { userFormSchema } from "@/components/features/admin-users-page/admin-use
 const ProfilePage = () => {
   const { data } = useSession()
 
-  const { fields, formData } = useUserData(data?.user ? (data.user as UserType | undefined) : {})
+  const { fields, formData } = useUserData(data?.user ? (data.user as UserType | undefined) : null)
 
   const availableFields = fields.filter((field) => field.name !== "role")
 
